@@ -41,7 +41,7 @@ function App() {
             <Footer />
         </div>
         <div>
-            <UserProfile name="Kofi" age="25" bio="ALX Student and an Enterpreneur." />
+            <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
         </div>
     </>
   )

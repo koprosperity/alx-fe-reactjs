@@ -1,5 +1,5 @@
 import RegistrationForm from "./components/RegistrationForm";
-import FormikForm from "./components/FormikForm";
+import formikForm from "./components/formikForm";
 
 const App = () => {
   return (
@@ -7,7 +7,7 @@ const App = () => {
       <h1>Controlled Form</h1>
       <RegistrationForm />
       <h1>Formik Form</h1>
-      <FormikForm />
+      <formikForm />
     </div>
   );
 };

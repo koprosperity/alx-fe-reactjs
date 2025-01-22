@@ -14,3 +14,13 @@ module.exports = {
   },
   plugins: [], // Add plugins if required
 };
+
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"], // Scans files for class names
+  theme: {
+    extend: {
+      // Extend or add custom styles here
+    },
+  },
+  plugins: [], // Add plugins if required
+};

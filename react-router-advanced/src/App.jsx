@@ -1,17 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './components/Home';
-import Profile from './components/Profile';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import BlogPost from "./components/BlogPost"; // Import the BlogPost component
 
 const App = () => {
-  const isAuthenticated = true;
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile/*" element={<Profile />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        <Route path="/profile" element={<Profile />} />
+        {/* Dynamic route for blog posts */}
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
   );

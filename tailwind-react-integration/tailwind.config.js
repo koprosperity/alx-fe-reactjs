@@ -6,3 +6,11 @@ module.exports = {
   },
   plugins: [], // Add plugins here if necessary
 };
+
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"], // Replaces "purge"
+  theme: {
+    extend: {}, // Extend the default theme if needed
+  },
+  plugins: [], // Add plugins if required
+};

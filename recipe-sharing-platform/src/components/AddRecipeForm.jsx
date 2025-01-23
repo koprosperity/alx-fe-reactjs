@@ -4,23 +4,40 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({}); // Store validation errors
+
+  // Validation logic
+  const validate = () => {
+    const errors = {};
+
+    if (!title.trim()) {
+      errors.title = "Title is required.";
+    }
+
+    if (!ingredients.trim()) {
+      errors.ingredients = "Ingredients are required.";
+    } else if (ingredients.split(",").length < 2) {
+      errors.ingredients = "Please provide at least two ingredients (comma-separated).";
+    }
+
+    if (!steps.trim()) {
+      errors.steps = "Preparation steps are required.";
+    }
+
+    return errors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation logic
-    if (!title || !ingredients || !steps) {
-      setError("All fields are required!");
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    if (ingredients.split(",").length < 2) {
-      setError("Please provide at least two ingredients (comma-separated).");
-      return;
-    }
+    setErrors({}); // Clear errors if validation passes
 
-    setError(""); // Clear error
     console.log("New Recipe Submitted:", { title, ingredients, steps });
 
     // Reset the form
@@ -34,11 +51,11 @@ const AddRecipeForm = () => {
       <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-6">
         Add New Recipe
       </h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg p-6 space-y-4"
       >
+        {/* Title Input */}
         <div>
           <label
             htmlFor="title"
@@ -51,10 +68,17 @@ const AddRecipeForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              errors.title ? "border-red-500" : ""
+            }`}
             placeholder="Enter the recipe title"
           />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+          )}
         </div>
+
+        {/* Ingredients Input */}
         <div>
           <label
             htmlFor="ingredients"
@@ -66,11 +90,18 @@ const AddRecipeForm = () => {
             id="ingredients"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              errors.ingredients ? "border-red-500" : ""
+            }`}
             rows="4"
             placeholder="e.g., eggs, flour, sugar"
           ></textarea>
+          {errors.ingredients && (
+            <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>
+          )}
         </div>
+
+        {/* Preparation Steps Input */}
         <div>
           <label
             htmlFor="steps"
@@ -82,11 +113,18 @@ const AddRecipeForm = () => {
             id="steps"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`w-full border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              errors.steps ? "border-red-500" : ""
+            }`}
             rows="6"
             placeholder="Describe the preparation steps"
           ></textarea>
+          {errors.steps && (
+            <p className="text-red-500 text-sm mt-1">{errors.steps}</p>
+          )}
         </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"

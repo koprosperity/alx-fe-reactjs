@@ -1,6 +1,6 @@
 module.exports = {
-  purge: ["./public/index.html"], // Files to scan for Tailwind classes
-  content: [".public/index.html"],
+  purge: ["./src/index.jsx"], // Files to scan for Tailwind classes
+  content: ["./src/index.jsx"],
   darkMode: "class", // Enable dark mode via "class" or "media"
   theme: {
     extend: {}, // Extend default Tailwind theme here

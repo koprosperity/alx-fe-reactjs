@@ -11,7 +11,14 @@ const HomePage = () => {
       .then((data) => setRecipes(data))
       .catch((error) => console.error("Error fetching recipe data:", error));
   }, []);
-
+<div className="flex justify-end mb-6">
+  <Link
+    to="/add-recipe"
+    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+  >
+    Add New Recipe
+  </Link>
+</div>
   return (
     <div className="p-4 md:p-8">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">Recipe Sharing Platform</h1>
